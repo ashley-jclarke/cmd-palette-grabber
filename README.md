@@ -18,10 +18,10 @@ I intend to add outputs for more software in the future.
 
 + alacritty
 + i3-wm
++ rofi
 
 ### Coming Soon
 
-+ rofi
 
 ## How it works
 
