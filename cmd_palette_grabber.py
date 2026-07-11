@@ -22,7 +22,32 @@ class Color:
 
     def __str__(self):
         return f"{self.name}\t- {self.color}\t - {self.get_hex()}"
+palette = [
+        Color((0,0,0), "black"),
+        Color((0,0,255), "blue"),
+        Color((0,255,255), "cyan"),
+        Color((0,255,0), "green"),
+        Color((255,0,255), "magenta"),
+        Color((255,0,0), "red"),
+        Color((240,240,240), "white")
+        ]
 
+bright_palette = [
+        Color((84, 112, 112), "black"),
+    Color((238,75,43), "red"),
+    Color((141, 186, 253), "blue"),
+    Color((172, 255, 252), "cyan"),
+    Color((45, 254, 84), "green"),
+    Color((213, 175, 249), "magenta"),
+    Color((255, 255, 255), "white")
+    ]
+
+grounds_palette = [
+        Color((45,45,48), "background"),
+        Color((200, 200, 200), "foreground"),
+        Color((180, 180, 180), "dim_foreground"),
+        Color((255, 255, 255), "bright_foreground")
+        ]
 
 def alacritty_config():
     print("\n\n################################")
@@ -37,6 +62,7 @@ def alacritty_config():
     print("\n[colors.primary]")
     for color in grounds_palette:
         print(f"{color.name} = \"#{color.get_hex()}\"")
+    print("\n\n")
 
 def i3wm_config():
     print("\n\n################################")
@@ -47,13 +73,28 @@ def i3wm_config():
         print(f"set ${color.name} #{color.get_hex()}")
     print("\n# Bright Colors")
     for color in bright_palette:
-        print(f"set $bright_{color.name} #{color.get_hex()}")
+        print(f"set $bright-{color.name} #{color.get_hex()}")
     print("\n# Background/Foreground colors")
     for color in grounds_palette:
         print(f"set ${color.name} #{color.get_hex()}")
+    print("\n\n")
 
 def rofi_config():
-    print("Warning! Not Implemented")
+    print("\n\n// ################################")
+    print("// ############# rofi #############")
+    print("// ################################")
+    
+    print("\n\t// Normal colors")
+    for color in palette:
+        print(f"\t{color.name}: #{color.get_hex()};")
+    print("\n\t// Bright colors")
+    for color in bright_palette:
+        print(f"\tbright-{color.name}: #{color.get_hex()};")
+    print("\n\t// Other colors")
+    for color in grounds_palette:
+        print(f"\t{color.name.replace("_", "-")}: #{color.get_hex()};")
+
+    print("// To retrieve the values use @COLOR\n\n")
 
 if __name__=="__main__":
     args = sys.argv 
@@ -75,40 +116,6 @@ if __name__=="__main__":
     im = Image.open(fp)
     pix = im.load()
     size = im.size
-
-    palette = [
-    Color((0,0,0), "black"),
-    Color((0,0,255), "blue"),
-    Color((0,255,255), "cyan"),
-    Color((0,255,0), "green"),
-    Color((255,0,255), "magenta"),
-    Color((255,0,0), "red"),
-    Color((240,240,240), "white")
-    ]
-
-    bright_palette = [
-    Color((84, 112, 112), "black"),
-    Color((238,75,43), "red"),
-    Color((141, 186, 253), "blue"),
-    Color((172, 255, 252), "cyan"),
-    Color((45, 254, 84), "green"),
-    Color((213, 175, 249), "magenta"),
-    Color((255, 255, 255), "white")
-    ]
-
-    grounds_palette = [
-    Color((45,45,48), "background"),
-    Color((200, 200, 200), "foreground"),
-    Color((180, 180, 180), "dim_foreground"),
-    Color((255, 255, 255), "bright_foreground")
-    ]
-
-    #extras = [
-    #    Color((), "orange"),
-    #    Color((), "yellow"),
-    #    Color((), "bright_orange"),
-    #    Color((), "bright_yellow"),
-    #]
 
     for x in range(size[0]):
         for y in range(size[1]):
